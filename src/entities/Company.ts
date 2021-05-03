@@ -13,7 +13,7 @@ export class Company {
   @Column()
   cnpj: string;
 
-  @Column()
+  @Column({ type: "decimal" })
   demand: number;
 
   @Column()
