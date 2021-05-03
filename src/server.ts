@@ -3,15 +3,18 @@ import express from "express";
 import "./database";
 import { getCustomRepository } from "typeorm";
 import { AnnualBillingRepository } from "./repositories/AnnualBillingRepository";
+import { CompanyRepository } from "./repositories/CompanyRepository";
 
 const app = express();
 
 app.use(express.json());
 
 app.get("/", async (req, res) => {
-  const annualBillingsRepository = getCustomRepository(AnnualBillingRepository);
-  const annualBillings = await annualBillingsRepository.find();
-  return res.json(annualBillings);
+  const companyRepository = getCustomRepository(CompanyRepository);
+  const companies = await companyRepository.find({
+    relations: ["annual_billing"]
+  });
+  return res.json(companies);
 })
 
 const PORT = process.env.PORT || 3333;
