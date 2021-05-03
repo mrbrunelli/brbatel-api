@@ -6,8 +6,9 @@ services:
     container_name: brbatel-postgres
     restart: always
     ports:
-      - 127.0.0.1:5432:5432
+      - 127.0.0.1:${DB_PORT}:5432
     environment:
-      - POSTGRES_PASSWORD=brbatel
-      - POSTGRES_DB=brbatel
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
       
