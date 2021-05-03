@@ -12,7 +12,7 @@ export const AnnualBillingSeed = [
     description: "Até R$ 50 a R$ 200 milhões",
   },
   {
-    id: "66ae09b99-a0f7-46bf-aa25-c1d912d852e9",
+    id: "5b239fc9-89fc-44dd-a599-4a0d6b4a015e",
     description: "Até R$ 200 a R$ 500 milhões",
   },
   {
