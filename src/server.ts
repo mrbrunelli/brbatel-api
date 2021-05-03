@@ -4,6 +4,7 @@ import "./database";
 import { getCustomRepository } from "typeorm";
 import { AnnualBillingRepository } from "./repositories/AnnualBillingRepository";
 import { CompanyRepository } from "./repositories/CompanyRepository";
+import { CompanyService } from "./services/CompanyService";
 
 const app = express();
 
@@ -15,7 +16,13 @@ app.get("/", async (req, res) => {
     relations: ["annual_billing"]
   });
   return res.json(companies);
-})
+});
+
+app.get("/companies", async (req, res) => {
+  const companyService = new CompanyService();
+  const result = await companyService.index(req.query);
+  return res.json(result);
+});
 
 const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => console.log("Server running on http://localhost:" + PORT));
