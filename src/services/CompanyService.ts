@@ -2,11 +2,13 @@ import { Between, Equal, getCustomRepository, ILike, Repository } from "typeorm"
 import { Company } from "../entities/Company";
 import { CompanyRepository } from "../repositories/CompanyRepository";
 
-interface ICompanyIndex {
+interface ICompanyFindAll {
   name?: string;
   cnpj?: string;
   demand?: string;
   created_at?: string;
+  page?: number;
+  limit?: number;
 }
 
 export class CompanyService {
@@ -16,13 +18,32 @@ export class CompanyService {
     this.companyRepository = getCustomRepository(CompanyRepository);
   }
 
-  async index({ name, cnpj, demand, created_at }: ICompanyIndex) {
+  async findAll({ name, cnpj, demand, created_at, limit, page }: ICompanyFindAll) {
+    const { take, skip } = this.paginate(limit, page);
     const findOptions = this.validateCompanyFindOptions(name, cnpj, demand, created_at);
-    const companies = await this.companyRepository.find({
+    const [companies, total] = await this.companyRepository.findAndCount({
       where: findOptions,
-      relations: ["annual_billing"]
+      relations: ["annual_billing"],
+      order: {
+        name: "ASC"
+      },
+      take,
+      skip
     });
-    return companies;
+    return {
+      total,
+      page: skip / take,
+      companies
+    }
+  }
+
+  private paginate(limit: number, page: number) {
+    const take = limit || 10;
+    const skip = (page || 0) * take;
+    return {
+      take,
+      skip
+    }
   }
 
   private validateCompanyFindOptions(
