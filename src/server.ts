@@ -20,7 +20,7 @@ app.get("/", async (req, res) => {
 
 app.get("/companies", async (req, res) => {
   const companyService = new CompanyService();
-  const result = await companyService.index(req.query);
+  const result = await companyService.findAll(req.query);
   return res.json(result);
 });
 
