@@ -78,8 +78,8 @@ export class CompanyService {
     created_at: string = undefined
   ) {
     const params = {};
-    const rangeDate = created_at ? created_at.trim().split(",") : undefined;
-    const rangeDemand = demand ? demand.trim().split(",") : undefined;
+    const rangeDate = created_at ? created_at.replace(/\s/g, "").split(",") : undefined;
+    const rangeDemand = demand ? demand.replace(/\s/g, "").split(",") : undefined;
     if (name) {
       Object.assign(params, { name: ILike(`%${name}%`) });
     }
