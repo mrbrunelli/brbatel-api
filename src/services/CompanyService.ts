@@ -11,11 +11,33 @@ interface ICompanyFindAll {
   limit?: number;
 }
 
+interface ICompanyCreate {
+  name: string;
+  cnpj: string;
+  demand: number;
+  about: string;
+  annual_billing_id: string;
+}
+
 export class CompanyService {
   private companyRepository: Repository<Company>
 
   constructor() {
     this.companyRepository = getCustomRepository(CompanyRepository);
+  }
+
+  async create({ name, cnpj, demand, about, annual_billing_id }: ICompanyCreate) {
+    const companyAlreadyExists = await this.companyRepository.findOne({
+      cnpj
+    });
+    if (companyAlreadyExists) {
+      throw new Error("Essa Empresa já está cadastrada no sistema.");
+    }
+    const company = await this.companyRepository.create({
+      name, cnpj, demand, about, annual_billing_id
+    });
+    await this.companyRepository.save(company);
+    return company;
   }
 
   async findAll({ name, cnpj, demand, created_at, limit, page }: ICompanyFindAll) {
@@ -38,6 +60,9 @@ export class CompanyService {
   }
 
   private paginate(limit: number, page: number) {
+    if (limit > 20) {
+      limit = 20;
+    }
     const take = limit || 10;
     const skip = (page || 0) * take;
     return {
