@@ -13,6 +13,10 @@ export class HttpStatus {
     return res.status(401).json(message);
   }
 
+  static unprocessable(res: Response, data: any) {
+    return res.status(422).json(data);
+  }
+
   static serverError(res: Response) {
     return res.status(500).json("Ocorreu um erro inesperado no servidor.");
   }
