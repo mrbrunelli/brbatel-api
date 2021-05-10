@@ -38,10 +38,21 @@ export class CompanyController {
     try {
       const { id } = req.params;
       const companyService = new CompanyService();
-      const company = await companyService.update({ id, ...req.body });
-      return HttpStatus.ok(res, company);
+      await companyService.update({ id, ...req.body });
+      return HttpStatus.ok(res, undefined);
     } catch (e) {
       console.log(e.message)
+      return HttpStatus.serverError(res);
+    }
+  }
+
+  async delete(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const companyService = new CompanyService();
+      companyService.delete(id);
+      return HttpStatus.ok(res, undefined);
+    } catch (e) {
       return HttpStatus.serverError(res);
     }
   }

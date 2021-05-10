@@ -54,6 +54,10 @@ export class CompanyService {
     await this.companyRepository.update({ id }, body);
   }
 
+  async delete(id: string) {
+    await this.companyRepository.delete({ id });
+  }
+
   async findAll({ name, cnpj, demand, created_at, limit, page }: ICompanyFindAll) {
     const { take, skip } = this.paginate(limit, page);
     const findOptions = this.validateCompanyFindOptions(name, cnpj, demand, created_at);
