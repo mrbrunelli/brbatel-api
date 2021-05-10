@@ -33,4 +33,16 @@ export class CompanyController {
       return HttpStatus.serverError(res);
     }
   }
+
+  async update(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const companyService = new CompanyService();
+      const company = await companyService.update({ id, ...req.body });
+      return HttpStatus.ok(res, company);
+    } catch (e) {
+      console.log(e.message)
+      return HttpStatus.serverError(res);
+    }
+  }
 }

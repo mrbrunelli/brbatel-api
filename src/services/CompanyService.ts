@@ -19,6 +19,15 @@ interface ICompanyCreate {
   annual_billing_id: string;
 }
 
+interface ICompanyUpdate {
+  id: string;
+  name?: string;
+  cnpj?: string;
+  demand?: number;
+  about?: string;
+  annual_billing_id?: string;
+}
+
 export class CompanyService {
   private companyRepository: Repository<Company>
 
@@ -38,6 +47,11 @@ export class CompanyService {
     });
     await this.companyRepository.save(company);
     return company;
+  }
+
+  async update({ id, about, annual_billing_id, cnpj, demand, name }: ICompanyUpdate) {
+    const body = this.validateCompanyBody(name, cnpj, demand, about, annual_billing_id);
+    await this.companyRepository.update({ id }, body);
   }
 
   async findAll({ name, cnpj, demand, created_at, limit, page }: ICompanyFindAll) {
@@ -60,7 +74,7 @@ export class CompanyService {
   }
 
   async findById(id: string) {
-    const company = this.companyRepository.findOne({
+    const company = await this.companyRepository.findOne({
       where: {
         id
       },
@@ -79,6 +93,32 @@ export class CompanyService {
       take,
       skip
     }
+  }
+
+  private validateCompanyBody(
+    name: string = undefined,
+    cnpj: string = undefined,
+    demand: number = undefined,
+    about: string = undefined,
+    annual_billing_id: string = undefined
+  ) {
+    const params = {};
+    if (name) {
+      Object.assign(params, { name });
+    }
+    if (cnpj) {
+      Object.assign(params, { cnpj });
+    }
+    if (demand) {
+      Object.assign(params, { demand });
+    }
+    if (about) {
+      Object.assign(params, { about });
+    }
+    if (annual_billing_id) {
+      Object.assign(params, { annual_billing_id });
+    }
+    return params;
   }
 
   private validateCompanyFindOptions(
