@@ -26,3 +26,21 @@ docker-compose up -d
   "url": "https://github.com/mrbrunelli/brbatel-api/tree/master/api-docs"
 }
 ```
+
+### Objetivos Propostos
+- [x] Estruturar o projeto para
+implementação de uma API Rest.
+- [x] Criar rotas de cadastro,
+atualização e exclusão da empresa.
+- [x] Criar rota para listar as empresas e
+essa rota deve comportar pesquisa e
+paginação.
+- [x] Criar rota para retornar a informação
+de uma empresa cadastrada baseado
+no ID dela (/company/:id).
+
+### Tecnologias Obrigatórias
+- [x] Node + Typescript
+- [x] Express
+- [x] PostgreSQL
+- [x] Git
