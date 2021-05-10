@@ -13,6 +13,17 @@ export class CompanyController {
     }
   }
 
+  async findById(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const companyService = new CompanyService();
+      const company = await companyService.findById(id);
+      return HttpStatus.ok(res, company);
+    } catch (e) {
+      return HttpStatus.serverError(res);
+    }
+  }
+
   async create(req: Request, res: Response) {
     try {
       const companyService = new CompanyService();

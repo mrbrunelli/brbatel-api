@@ -59,6 +59,16 @@ export class CompanyService {
     }
   }
 
+  async findById(id: string) {
+    const company = this.companyRepository.findOne({
+      where: {
+        id
+      },
+      relations: ["annual_billing"]
+    });
+    return company;
+  }
+
   private paginate(limit: number, page: number) {
     if (limit > 20) {
       limit = 20;
