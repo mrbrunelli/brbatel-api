@@ -18,7 +18,7 @@ export const validateCompanyQuery = celebrate({
   }).options({ allowUnknown: true })
 });
 
-export const validateCompanyBody = celebrate({
+export const validateCompanyCreateBody = celebrate({
   [Segments.BODY]: Joi.object({
     name: Joi.string()
       .required(),
@@ -34,6 +34,22 @@ export const validateCompanyBody = celebrate({
       .required(),
     annual_billing_id: Joi.string()
       .required()
+      .uuid({ separator: "-", version: "uuidv4" })
+      .message("O campo 'annual_billing_id' é do tipo UUID v4, e deve conter 36 caracteres.")
+  })
+});
+
+export const validateCompanyUpdateBody = celebrate({
+  [Segments.BODY]: Joi.object({
+    name: Joi.string(),
+    cnpj: Joi.string()
+      .length(14)
+      .message("O CNPJ deve ser informado com 14 dígitos.")
+      .pattern(/^\d{14}$/)
+      .message("O CNPJ deve ser informado sem pontos, traços ou barras."),
+    demand: Joi.number(),
+    about: Joi.string(),
+    annual_billing_id: Joi.string()
       .uuid({ separator: "-", version: "uuidv4" })
       .message("O campo 'annual_billing_id' é do tipo UUID v4, e deve conter 36 caracteres.")
   })
