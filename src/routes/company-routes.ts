@@ -14,3 +14,4 @@ companyRoutes.get("/", validateCompanyQuery, companyController.findAll);
 companyRoutes.get("/:id", validateCompanyParams, companyController.findById);
 companyRoutes.post("/", validateCompanyCreateBody, companyController.create);
 companyRoutes.put("/:id", validateCompanyParams, validateCompanyUpdateBody, companyController.update);
+companyRoutes.delete("/:id", validateCompanyParams, companyController.delete);
