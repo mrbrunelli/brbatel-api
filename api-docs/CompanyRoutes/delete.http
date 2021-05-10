@@ -1,0 +1,1 @@
+DELETE http://localhost:3333/companies/ab1f829c-a39a-464a-84e9-1362f30ab553 HTTP/1.1
