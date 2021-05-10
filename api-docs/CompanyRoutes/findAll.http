@@ -4,7 +4,7 @@ GET http://localhost:3333/companies
 
 GET http://localhost:3333/companies
   ?name=florai
-  &cnpj=00077877477785
+  &cnpj=45248633000151
 
 ###
 
@@ -17,7 +17,7 @@ GET http://localhost:3333/companies
 GET http://localhost:3333/companies
   ?demand=9000,180000
   &limit=5
-  &page=1
+  &page=0
 
 ###
 

@@ -1,8 +1,8 @@
-PUT http://localhost:3333/companies/ab1f829c-a39a-464a-84e9-1362f30ab553 HTTP/1.1
+PUT http://localhost:3333/companies/ba1ed8c7-79f0-47df-b20b-19d4b0c787b0 HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Florai Supermercados",
-	"demand": 2520000,
-	"about": "Rede varejista de supermercados"
+  "name": "Açaí e Sorvete do Zé",
+	"demand": 22000,
+	"about": "Comércio de Açaí e Sorvetes"
 }

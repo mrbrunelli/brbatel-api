@@ -2,9 +2,9 @@ POST http://localhost:3333/companies HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Floraí",
-	"cnpj": "00077877477789",
-	"demand": 108000,
-	"about": "Rede de supermercados",
-	"annual_billing_id": "66555b30-2dc0-478d-a18f-246d948553d8"
+  "name": "BrBatel",
+	"cnpj": "11411556000197",
+	"demand": 2500000,
+	"about": "Crédito para Médias e Grandes Empresas",
+	"annual_billing_id": "45413c0f-2ae0-4a96-a7af-f8b63a51ee2a"
 }
