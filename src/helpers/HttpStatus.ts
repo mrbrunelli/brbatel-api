@@ -13,6 +13,10 @@ export class HttpStatus {
     return res.status(401).json(message);
   }
 
+  static notFound(res: Response, data: any) {
+    return res.status(404).json(data);
+  }
+
   static unprocessable(res: Response, data: any) {
     return res.status(422).json(data);
   }
