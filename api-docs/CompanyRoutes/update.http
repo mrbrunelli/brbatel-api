@@ -1,0 +1,8 @@
+PUT http://localhost:3333/companies/ab1f829c-a39a-464a-84e9-1362f30ab553 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Florai Supermercados",
+	"demand": 2520000,
+	"about": "Rede varejista de supermercados"
+}
